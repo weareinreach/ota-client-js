@@ -1,6 +1,7 @@
 import { AxiosHttpClient } from './internal/http/axiosClient';
-import { isJsonFile, mergeDeep } from './internal/util/strings';
+import { isJsonFile } from './internal/util/strings';
 import { ClientConfig, HttpClient, LanguageStrings, LanguageTranslations, Manifest, Translations } from './model';
+import * as merge from 'deepmerge';
 
 /**
  * @category OtaClient
@@ -227,7 +228,7 @@ export default class OtaClient {
             if (this.disableJsonDeepMerge) {
                 strings = { ...strings, ...content };
             } else {
-                mergeDeep(strings, content);
+                merge(strings, content);
             }
         }
         return strings;
